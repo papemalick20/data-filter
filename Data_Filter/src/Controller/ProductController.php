@@ -18,12 +18,17 @@ class ProductController extends AbstractController
     public function index(Request $request, ProductRepository $productRepository): Response
     {
         $data = new SearchData();
+        $data->page=$request->get('page', 1);
         $form = $this->createForm(SearchForm::class,$data);
         $form->handleRequest($request);
+        [$min, $max] = $productRepository->findMinMax($data);
+       
         $products =$productRepository->findSearch($data);
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'form'=> $form->createView()
+            'form'=> $form->createView(),
+            'min'=> $min,
+            'max'=> $max
         ]);
     }
 }
