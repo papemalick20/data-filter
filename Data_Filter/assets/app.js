@@ -3,6 +3,9 @@ import './styles/app.css';
 
 import './bootstrap';
 import noUiSlider from 'nouislider'
+import Filter from './modules/Filter'
+
+new Filter(document.getSelector('.js-filter'))
 
 const slider = document.getElementById('price-slider');
 
@@ -28,6 +31,9 @@ if (slider) {
         if (handle === 1) {
             max.value = Math.round(values[1])
         }
-        console.log(values, handle)
+        //console.log(values, handle)
+    })
+    range.on('end', function(valuee, hanle) {
+        min.dispatchEvent(new Event('change'))
     })
 }

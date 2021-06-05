@@ -3,7 +3,7 @@
 {% block title %}Tous nos produits!{% endblock %}
 
 {% block body %}
-  <div class="container">
+  <div class="container js-filter">
     <div class="row">
       <div class="col-md-3">
         {% include 'product/_filter.html.twig' with {
@@ -14,19 +14,13 @@
         only %}
       </div>
       <div class="col-md-9">
-        <div class="d-flex-justify-content text-right mb-2">
-          {{ knp_pagination_sortable(products, 'Prix', 'p.price')}}
-          {{ knp_pagination_sortable(products, 'Promo', 'p.promo')}}
+        <div class="d-flex-justify-content text-right mb-2 js-filter-sorting">
+          {% include 'product/_sorting.html.twig'%}
         </div>
-        <div class="grid">
-          {% for product in products %}
-            {% include "product/_card.html.twig" with {
-              product : product
-            }
-            only %}
-          {% endfor %}
+        <div class="grid js-filter-content">
+          {% include 'product/_product.html.twig'%}
         </div>
-        <div>
+        <div class="js-filter-pagination">
           {{ knp_pagination_render(products) }}
         </div>
       </div>

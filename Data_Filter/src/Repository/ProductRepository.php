@@ -50,7 +50,7 @@ class ProductRepository extends ServiceEntityRepository
         ->select('MIN(p.price) as min', 'MAX(p.price) as max')
         ->getQuery()
         ->getScalarResult();
-        return [(int)$result[0]['min'],(int)  $result[0]['max']];
+        return [(int)$result[0]['min'],  (int) $result[0]['max']];
       }
         /**
          * @return QueryBuilder
